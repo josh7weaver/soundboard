@@ -14,9 +14,11 @@ class CreateSongTable extends Migration
     {
         Schema::create('song', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('artist');
             $table->string('youtube_url');
-            $table->integer('start_minutes');
-            $table->integer('start_seconds');
+            $table->integer('start_minutes')->nullable();
+            $table->integer('start_seconds')->nullable();
         });
     }
 

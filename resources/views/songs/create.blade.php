@@ -5,6 +5,10 @@
 
     {!! Form::open(['route' => ['song.store']]) !!}
         <div class="form-group">
+            {{ Form::label('name', 'Song Name:') }}
+            {{ Form::text('name') }}
+        </div>
+        <div class="form-group">
             {{ Form::label('youtube_url', 'Youtube Url:') }}
             {{ Form::text('youtube_url', null, ['size'=>50]) }}
         </div>

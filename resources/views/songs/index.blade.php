@@ -2,7 +2,10 @@
 
 @section('content')
     <h1>All Songs</h1>
+
+    <ul id="song-list">
     @foreach($songs as $song)
-        {{dump($song)}}
+        <li>{{$song->name}}: {{$song->youtube_url}}</li>
     @endforeach
+    </ul>
 @endsection

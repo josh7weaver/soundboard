@@ -32,12 +32,21 @@ class SongController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        return "hi";
+        $this->validate($request, [
+            'youtube_url' => 'required'
+        ]);
+
+        $song = new Song($request->except('_token'));
+        if($song->save()){
+            return redirect()->route('song.index')->with('success', 'Saved song successfully');
+        } else {
+            return redirect()->back()->with('error', "Problem saving new song");
+        }
     }
 
     /**
