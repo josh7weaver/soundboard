@@ -16,7 +16,7 @@ class SongController extends Controller
      */
     public function index()
     {
-        return view(Song::all());
+        return view('songs.index', ['songs' => Song::all()]);
     }
 
     /**
@@ -26,7 +26,7 @@ class SongController extends Controller
      */
     public function create()
     {
-        //
+        return view('songs.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return "hi";
     }
 
     /**
@@ -48,7 +48,8 @@ class SongController extends Controller
      */
     public function show($id)
     {
-        //
+        $song = Song::where('id', $id)->firstOrFail();
+        return view('songs.show', ['song' => $song]);
     }
 
     /**
