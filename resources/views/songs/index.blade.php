@@ -8,4 +8,6 @@
         <li>{{$song->name}}: {{$song->youtube_url}}</li>
     @endforeach
     </ul>
+
+     <a href="{{route('song.create')}}">Add song to soundboard</a>
 @endsection
