@@ -12,7 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    redirect()->route('song.index');
 });
 
 Route::resource('song', 'SongController');
+
+Route::get('song/{song}/delete', ['as' => 'song.delete', 'uses' => 'SongController@destroy']);

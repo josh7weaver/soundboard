@@ -16,6 +16,7 @@ class SongController extends Controller
      */
     public function index()
     {
+
         return view('songs.index', ['songs' => Song::all()]);
     }
 
@@ -103,6 +104,11 @@ class SongController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Song::destroy($id)){
+            return redirect()->route('song.index')->with('success', 'Deleted song');
+        }
+        else{
+            return redirect()->route('song.index')->with('error', 'Failed to delete song');
+        }
     }
 }
