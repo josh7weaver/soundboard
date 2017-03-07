@@ -20,7 +20,7 @@
                 <a href="{{route('song.show', [$song->getKey()])}}">{{$song->name}}</a>
             </td>
             <td>{{$song->view_count}}</td>
-            <td>5</td>
+            <td>{{$song->getAvgRating()}}</td>
             <td>
                 <a href="{{route('song.edit', [$song->getKey()])}}">Edit</a> |
                 <a href="{{route('song.delete', [$song->getKey()])}}" onclick="javascript:return confirm('are you sure?')">Delete</a>
