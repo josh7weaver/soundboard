@@ -65,6 +65,9 @@ class SongController extends Controller
         if(!isset($params['v'])){
             $params['v'] = ltrim(parse_url($song->youtube_url, PHP_URL_PATH), '/');
         }
+        if(!isset($params['t'])){
+            $params['t'] = 0;
+        }
 
         return view('songs.show', [
             'song' => $song,
