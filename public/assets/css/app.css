@@ -1,0 +1,7 @@
+iframe#ytplayer{
+    height: 90px;
+}
+
+video{
+    display:none !important;
+}

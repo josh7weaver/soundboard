@@ -58,7 +58,7 @@ class SongController extends Controller
     public function show($id)
     {
         $song = Song::where('id', $id)->firstOrFail();
-        return view('songs.show', ['song' => $song]);
+        return view('songs.show', ['song' => $song, 'videoId' => 'M7lc1UVf-VE']);
     }
 
     /**
