@@ -7,7 +7,7 @@
     @foreach($songs as $song)
         <li>
             <a href="{{route('song.show', [$song->getKey()])}}">{{$song->name}}</a> ||
-            <a href="{{route('song.delete', [$song->getKey()])}}">[X]</a>
+            <a href="{{route('song.delete', [$song->getKey()])}}" onclick="javascript:return confirm('are you sure?')">[X]</a>
         </li>
     @endforeach
     </ul>
