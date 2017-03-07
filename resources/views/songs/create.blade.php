@@ -11,20 +11,9 @@
 
     </p>
 
-    {!! Form::open(['route' => ['song.store']]) !!}
-        <div class="form-group">
-            {{ Form::label('name', 'Song Name:') }}
-            {{ Form::text('name') }}
-        </div>
-        <div class="form-group">
-            {{ Form::label('youtube_url', 'Youtube Url:') }}
-            {{ Form::text('youtube_url', null, ['size'=>50]) }}
-        </div>
+    @include('songs._form', ['song' => null])
 
-        {{ Form::submit('Save Song!') }}
-    {!! Form::close() !!}
-
-    <div>
-        <a href="{{route('song.index')}}">Back to song list</a>
+    <div class="space-above">
+        <a href="{{route('song.index')}}"><< Back to song list</a>
     </div>
 @endsection

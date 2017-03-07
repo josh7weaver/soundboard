@@ -6,7 +6,7 @@
             src="https://www.youtube.com/embed/{{$videoId}}?autoplay=1&start={{$startTime}}"
             frameborder="0"></iframe>
 
-    <div>
-        <a href="{{route('song.index')}}">Back to song list</a>
+    <div class="space-above">
+        <a href="{{route('song.index')}}"><< Back to song list</a>
     </div>
 @endsection

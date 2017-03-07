@@ -59,15 +59,23 @@ class SongController extends Controller
     public function show($id)
     {
         $song = Song::where('id', $id)->firstOrFail();
+
+        // Get video id and start time from youtube url given
         $queryString = parse_url($song->youtube_url, PHP_URL_QUERY); // extract query string from url
         parse_str($queryString, $params);
 
+        // guard for shorter url format that doesn't have v param
         if(!isset($params['v'])){
             $params['v'] = ltrim(parse_url($song->youtube_url, PHP_URL_PATH), '/');
         }
+
+        // guard if video starts at beginning
         if(!isset($params['t'])){
             $params['t'] = 0;
         }
+
+        $song->view_count++;
+        $song->save();
 
         return view('songs.show', [
             'song' => $song,
