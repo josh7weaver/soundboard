@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    redirect()->route('song.index');
-});
+Route::get('/', ['uses' => 'SongController@index']);
 
 Route::resource('song', 'SongController');
 
