@@ -58,7 +58,14 @@ class SongController extends Controller
     public function show($id)
     {
         $song = Song::where('id', $id)->firstOrFail();
-        return view('songs.show', ['song' => $song, 'videoId' => 'M7lc1UVf-VE']);
+        $queryString = parse_url($song->youtube_url, PHP_URL_QUERY); // extract query string from url
+        parse_str($queryString, $params);
+
+        return view('songs.show', [
+            'song' => $song,
+            'videoId' => $params['v'],
+            'startTime' => $params['t'],
+        ]);
     }
 
     /**

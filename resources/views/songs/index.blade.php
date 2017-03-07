@@ -5,9 +5,11 @@
 
     <ul id="song-list">
     @foreach($songs as $song)
-        <li>{{$song->name}}: {{$song->youtube_url}}</li>
+        <li><a href="{{route('song.show', [$song->getKey()])}}">{{$song->name}}: {{$song->youtube_url}}</a></li>
     @endforeach
     </ul>
 
-     <a href="{{route('song.create')}}">Add song to soundboard</a>
+    <p>
+        <a href="{{route('song.create')}}">Add song to soundboard</a>
+    </p>
 @endsection
