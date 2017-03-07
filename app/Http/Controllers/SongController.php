@@ -83,6 +83,8 @@ class SongController extends Controller
             'song' => $song,
             'videoId' => $params['v'],
             'startTime' => $params['t'],
+            'songRating' => new SongRating,
+            'ratings' => $this->getAllowedRatings(),
         ]);
     }
 
@@ -144,13 +146,18 @@ class SongController extends Controller
         return view('ratings.edit', [
             'song' => $song,
             'songRating' => new SongRating,
-            'ratings' => array_combine([1,2,3,4,5], [
-                '1 (crap)',
-                '2',
-                '3 (average)',
-                '4',
-                '5 (gives you tingles)'
-            ])
+            'ratings' => $this->getAllowedRatings()
+        ]);
+    }
+
+    private function getAllowedRatings()
+    {
+        return array_combine([1,2,3,4,5], [
+            '1 (crap)',
+            '2',
+            '3 (average)',
+            '4',
+            '5 (gives you tingles)'
         ]);
     }
 
@@ -162,7 +169,7 @@ class SongController extends Controller
         ]);
 
         if($rating->save()){
-            return redirect()->route('song.index')->with('success', "Updated Rating!");
+            return redirect()->route('song.show', $songId)->with('success', "Updated Rating!");
         }
         else {
             return redirect()->back()->with('error', "Failed to save rating.");

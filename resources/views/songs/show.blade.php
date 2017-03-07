@@ -7,6 +7,10 @@
             frameborder="0"></iframe>
 
     <div class="space-above">
+        @include('ratings.edit_form')
+    </div>
+
+    <div class="space-above">
         <a href="{{route('song.index')}}"><< Back to song list</a>
     </div>
 @endsection
