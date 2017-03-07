@@ -61,6 +61,10 @@ class SongController extends Controller
         $queryString = parse_url($song->youtube_url, PHP_URL_QUERY); // extract query string from url
         parse_str($queryString, $params);
 
+        if(!isset($params['v'])){
+            $params['v'] = ltrim(parse_url($song->youtube_url, PHP_URL_PATH), '/');
+        }
+
         return view('songs.show', [
             'song' => $song,
             'videoId' => $params['v'],
