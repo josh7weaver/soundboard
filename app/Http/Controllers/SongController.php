@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Song;
+use App\SongRating;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -39,6 +40,7 @@ class SongController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'name' => 'required',
             'youtube_url' => 'required'
         ]);
 
@@ -92,7 +94,8 @@ class SongController extends Controller
      */
     public function edit($id)
     {
-        //
+        $song = Song::where('id', $id)->firstOrFail();
+        return view('songs.edit', ['song' => $song]);
     }
 
     /**
@@ -104,7 +107,19 @@ class SongController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'youtube_url' => 'required'
+        ]);
+
+        $song = Song::where('id', $id)->firstOrFail();
+        $song->fill($request->except('_token'));
+
+        if($song->save()){
+            return redirect()->route('song.index')->with('success', 'Saved song successfully');
+        } else {
+            return redirect()->back()->with('error', "Problem saving new song");
+        }
     }
 
     /**
@@ -120,6 +135,37 @@ class SongController extends Controller
         }
         else{
             return redirect()->route('song.index')->with('error', 'Failed to delete song');
+        }
+    }
+
+    public function editRating($songId)
+    {
+        $song = Song::where('id', $songId)->firstOrFail();
+        return view('ratings.edit', [
+            'song' => $song,
+            'songRating' => new SongRating,
+            'ratings' => array_combine([1,2,3,4,5], [
+                '1 (crap)',
+                '2',
+                '3 (average)',
+                '4',
+                '5 (gives you tingles)'
+            ])
+        ]);
+    }
+
+    public function updateRating(Request $request, $songId)
+    {
+        $rating = new SongRating([
+            'song_id' => $songId,
+            'rating' => $request->get('rating'),
+        ]);
+
+        if($rating->save()){
+            return redirect()->route('song.index')->with('success', "Updated Rating!");
+        }
+        else {
+            return redirect()->back()->with('error', "Failed to save rating.");
         }
     }
 }
