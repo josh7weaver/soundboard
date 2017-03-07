@@ -169,7 +169,7 @@ class SongController extends Controller
         ]);
 
         if($rating->save()){
-            return redirect()->route('song.show', $songId)->with('success', "Updated Rating!");
+            return redirect()->route('song.index')->with('success', "Updated Rating!");
         }
         else {
             return redirect()->back()->with('error', "Failed to save rating.");
