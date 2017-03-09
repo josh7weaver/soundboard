@@ -17,6 +17,7 @@ class Song extends Model
 
     public static function destroy($ids)
     {
+        $ids = is_array($ids) ? $ids : func_get_args();
         SongRating::whereIn('song_id', $ids)
             ->get()
             ->each(function($rating){
