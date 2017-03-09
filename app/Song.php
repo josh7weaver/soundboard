@@ -15,6 +15,17 @@ class Song extends Model
         return $this->hasMany(SongRating::class);
     }
 
+    public static function destroy($ids)
+    {
+        SongRating::whereIn('song_id', $ids)
+            ->get()
+            ->each(function($rating){
+                $rating->delete();
+            });
+
+        return parent::destroy($ids);
+    }
+
     /**
      * Method runs query to fetch the average rating
      * @return float 1 decimal place
