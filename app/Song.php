@@ -8,7 +8,6 @@ class Song extends Model
 {
     protected $table = 'song';
     protected $guarded = [];
-    public $timestamps = false;
 
     public function ratings()
     {
