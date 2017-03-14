@@ -12,6 +12,7 @@
 */
 
 Route::get('/', ['uses' => 'SongController@index']);
+Route::get('song/random', ['as' => 'song.random', 'uses' => 'SongController@random']);
 
 Route::resource('song', 'SongController');
 

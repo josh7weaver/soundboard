@@ -175,4 +175,10 @@ class SongController extends Controller
             return redirect()->back()->with('error', "Failed to save rating.");
         }
     }
+
+    public function random()
+    {
+        $song = Song::inRandomOrder()->first();
+        return redirect()->route('song.show', [$song->getKey()]);
+    }
 }
