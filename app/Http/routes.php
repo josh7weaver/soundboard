@@ -22,4 +22,4 @@ Route::get('song/{song}/rating', ['as'=>'song.rating.edit', 'uses'=>'SongControl
 Route::post('song/{song}/rating', ['as'=>'song.rating.update', 'uses'=>'SongController@updateRating']);
 
 
-Route::post('api/v1/song', ['as' => 'api.v1.song', 'uses' => 'SongApiController@songCommand']);
+Route::any('api/v1/song', ['as' => 'api.v1.song', 'uses' => 'SongApiController@songCommand']);
