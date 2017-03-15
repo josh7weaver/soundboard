@@ -9,6 +9,7 @@ class SongApiController extends Controller
 {
     public function songCommand(Request $request)
     {
+        \Log::info('request', [$request->all()]);
         $song = Song::inRandomOrder()->first();
         return response()->json([
           'response_type' => 'in_channel',
