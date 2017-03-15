@@ -20,3 +20,6 @@ Route::get('song/{song}/delete', ['as' => 'song.delete', 'uses' => 'SongControll
 
 Route::get('song/{song}/rating', ['as'=>'song.rating.edit', 'uses'=>'SongController@editRating']);
 Route::post('song/{song}/rating', ['as'=>'song.rating.update', 'uses'=>'SongController@updateRating']);
+
+
+Route::post('api/v1/song', ['as' => 'api.v1.song', 'uses' => 'SongApiController@songCommand']);
