@@ -14,6 +14,16 @@ class Song extends Model
         return $this->hasMany(SongRating::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'song_tag');
+    }
+
+    public function getTagsAsCsv()
+    {
+        return implode(',', $this->tags->pluck('name')->toArray());
+    }
+
     public static function destroy($ids)
     {
         $ids = is_array($ids) ? $ids : func_get_args();

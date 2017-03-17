@@ -12,7 +12,8 @@
         <tr>
             <th>Song Name</th>
             <th>View Count</th>
-            <th>Rating (out of 5)</th>
+            <th>Rating (1-5)</th>
+            <th>Tags</th>
             <th>Created</th>
             <th>Updated</th>
             <th>Actions</th>
@@ -24,6 +25,7 @@
             </td>
             <td>{{$song->view_count}}</td>
             <td>{{$song->getAvgRating()}}</td>
+            <td>{{$song->getTagsAsCsv() }}</td>
             <td>{{$song->created_at}}</td>
             <td>{{$song->updated_at}}</td>
             <td>

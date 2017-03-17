@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Song;
 use App\SongRating;
+use App\Tag;
+use Illuminate\Contracts\Logging\Log;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -96,8 +98,11 @@ class SongController extends Controller
      */
     public function edit($id)
     {
-        $song = Song::where('id', $id)->firstOrFail();
-        return view('songs.edit', ['song' => $song]);
+        $song = Song::where('id', $id)->with('tags')->firstOrFail();
+        return view('songs.edit', [
+            'song' => $song,
+            'tagsCsv'=> $song->getTagsAsCsv(),
+        ]);
     }
 
     /**
@@ -115,7 +120,18 @@ class SongController extends Controller
         ]);
 
         $song = Song::where('id', $id)->firstOrFail();
-        $song->fill($request->except('_token'));
+        $song->fill($request->except(['_token','tag_input']));
+
+        if($request->has('tag_input') && $request->get('tag_input')){
+            $tagNames = explode(',', $request->get('tag_input'));
+            $tags = collect();
+            foreach ($tagNames as $tagName){
+                $tags->push(
+                    Tag::firstOrCreate(['name'=>strtolower(trim($tagName))])
+                );
+            }
+            $song->tags()->sync($tags->pluck('id')->toArray());
+    }
 
         if($song->save()){
             return redirect()->route('song.index')->with('success', 'Saved song successfully');
@@ -127,12 +143,14 @@ class SongController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     * @param Log $log
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Log $log, Request $request)
     {
         if(Song::destroy($id)){
+            $log->info("DELETE song id = $id", ['requester_ip'=> $request->ips()]);
             return redirect()->route('song.index')->with('success', 'Deleted song');
         }
         else{

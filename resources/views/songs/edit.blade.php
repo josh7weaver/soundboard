@@ -12,6 +12,11 @@
         {{ Form::label('youtube_url', 'Youtube Url:') }}
         {{ Form::text('youtube_url', null, ['size'=>50, 'class'=>'form-control']) }}
     </div>
+    <div class="form-group">
+        {{ Form::label('tag_input', 'Add keyword tags (for slack integration):') }}
+        {{ Form::text('tag_input', $tagsCsv, ['size'=>50, 'class'=>'form-control']) }}
+        <p style="font-style: italic">Separate tags with comma</p>
+    </div>
 
     {{ Form::submit('Save Changes', ['class'=>'btn btn-default']) }}
     {!! Form::close() !!}
