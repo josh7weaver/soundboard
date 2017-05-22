@@ -18,7 +18,7 @@ Route::get('song/random', ['as' => 'song.random', 'uses' => 'SongController@rand
 
 Route::resource('song', 'SongController');
 
-//Route::get('song/{song}/delete', ['as' => 'song.delete', 'uses' => 'SongController@destroy']);
+Route::get('song/{song}/delete', ['as' => 'song.delete', 'uses' => 'SongController@destroy']);
 
 Route::get('song/{song}/rating', ['as'=>'song.rating.edit', 'uses'=>'SongController@editRating']);
 Route::post('song/{song}/rating', ['as'=>'song.rating.update', 'uses'=>'SongController@updateRating']);

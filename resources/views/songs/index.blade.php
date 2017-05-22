@@ -31,7 +31,7 @@
             <td>
                 <a href="{{route('song.rating.edit', [$song->getKey()])}}">Rate</a> |
                 <a href="{{route('song.edit', [$song->getKey()])}}">Edit</a> |
-                <a href="{{route('song.delete', [$song->getKey()])}}" onclick="javascript:return confirm('are you sure?')">Delete</a>
+{{--                <a href="{{route('song.delete', [$song->getKey()])}}" onclick="javascript:return confirm('are you sure?')">Delete</a>--}}
             </td>
         </tr>
     @endforeach
